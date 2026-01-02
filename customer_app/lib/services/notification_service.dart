@@ -1,5 +1,5 @@
-
-  import 'dart:convert';
+//notification_service.dart
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:googleapis_auth/auth_io.dart';
@@ -20,9 +20,9 @@ class NotificationSender {
     final token = doc['fcmToken'];
     // final token = "c8ecAiStQRys4YWC7mleBV:APA91bHQWskHIgKJv-E52FnVZkFSQzogHL4uChVgixbizieVJVWHr-Xeav3QH2ouqXnq1ZZV-tBRLRHN4loFJstN_u9gITbLwHGStyVek6p3bt5GvDHmz20";
 
-  
+//Access Token
     final jsonString = await rootBundle.loadString(
-      'assets/firebase/restaurant-reservation-a-fc826-firebase-adminsdk-fbsvc-2eee802827.json',
+      'assets/firebase/restaurant-reservation-a-fc826-firebase-adminsdk-fbsvc-70e958eb20.json',
     );
     final jsonMap = jsonDecode(jsonString);
 
@@ -55,4 +55,4 @@ class NotificationSender {
 
     client.close();
   }
-}  
+}

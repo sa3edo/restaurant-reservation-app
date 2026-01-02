@@ -1,3 +1,4 @@
+//notification_helper.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -32,3 +33,5 @@ Future<void> showLocalNotificationFromData({
     const NotificationDetails(android: android),
   );
 }
+
+//customer : service , token(receiver)   , get service account (fire base admin api) , create client to send noti using service account , get api url which we send fcm , type noti body , send noti , 

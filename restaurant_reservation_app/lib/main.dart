@@ -1,4 +1,4 @@
- import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -46,16 +46,13 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   );
 }
 
-
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-FirebaseMessaging.onBackgroundMessage(
-    firebaseMessagingBackgroundHandler,
-  );
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   NotificationService.navigatorKey = navigatorKey;
   await NotificationService().init();
@@ -81,10 +78,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
 
       debugShowCheckedModeBanner: false,
-      routes: {
-        VendorNotificationsScreen.routeName: (_) =>
-            const VendorNotificationsScreen(),
-      },
+
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: .fromSeed(
@@ -94,4 +88,4 @@ class MyApp extends StatelessWidget {
       home: VendorHomeScreen(),
     );
   }
-} 
+}

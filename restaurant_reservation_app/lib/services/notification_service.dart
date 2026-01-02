@@ -12,7 +12,7 @@ class NotificationService {
   final _local = FlutterLocalNotificationsPlugin();
 
   static GlobalKey<NavigatorState>? navigatorKey;
-
+  //app oppened
   Future<void> init() async {
     await _messaging.requestPermission();
 
@@ -34,7 +34,7 @@ class NotificationService {
         _openNotificationsScreen();
       },
     );
-
+    //show when app oppened
     FirebaseMessaging.onMessage.listen((message) async {
       final title = message.data['title'];
       final body = message.data['body'];
@@ -51,9 +51,16 @@ class NotificationService {
         body: body,
       );
     });
-
+    //show when app oppened from noti
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
-      await _saveNotification(message);
+      final title = message.data['title'];
+      final body = message.data['body'];
+
+      await saveNotificationFromData(
+        firestore: _firestore,
+        title: title,
+        body: body,
+      );
       _openNotificationsScreen();
     });
 
@@ -65,32 +72,35 @@ class NotificationService {
   }
 
   void _openNotificationsScreen() {
-    navigatorKey?.currentState?.pushNamed(VendorNotificationsScreen.routeName);
+    navigatorKey?.currentState?.push(
+  MaterialPageRoute(builder: (_) => VendorNotificationsScreen()),
+);
+
   }
 
-  Future<void> showLocalNotification(RemoteMessage message) async {
-    const android = AndroidNotificationDetails(
-      'vendor_channel',
-      'Vendor Notifications',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
+  // Future<void> showLocalNotification(RemoteMessage message) async {
+  //   const android = AndroidNotificationDetails(
+  //     'vendor_channel',
+  //     'Vendor Notifications',
+  //     importance: Importance.max,
+  //     priority: Priority.high,
+  //   );
 
-    const details = NotificationDetails(android: android);
+  //   const details = NotificationDetails(android: android);
 
-    await _local.show(
-      DateTime.now().millisecondsSinceEpoch ~/ 1000,
-      message.notification?.title ?? 'New Booking',
-      message.notification?.body ?? '',
-      details,
-    );
-  }
+  //   await _local.show(
+  //     DateTime.now().millisecondsSinceEpoch ~/ 1000,
+  //     message.notification?.title ?? 'New Booking',
+  //     message.notification?.body ?? '',
+  //     details,
+  //   );
+  // }
 
-  Future<void> _saveNotification(RemoteMessage message) async {
-    await _firestore.collection('vendor_notifications').add({
-      'title': message.notification?.title ?? 'New Booking',
-      'body': message.notification?.body ?? '',
-      'createdAt': Timestamp.now(),
-    });
-  }
+  // Future<void> _saveNotification(RemoteMessage message) async {
+  //   await _firestore.collection('vendor_notifications').add({
+  //     'title': message.notification?.title ?? 'New Booking',
+  //     'body': message.notification?.body ?? '',
+  //     'createdAt': Timestamp.now(),
+  //   });
+  // }
 }

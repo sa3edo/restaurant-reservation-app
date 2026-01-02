@@ -1,10 +1,9 @@
+//vendor_notification_screen.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class VendorNotificationsScreen extends StatelessWidget {
-  static const routeName = '/vendor-notifications';
-
   const VendorNotificationsScreen({super.key});
 
   @override

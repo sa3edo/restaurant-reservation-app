@@ -11,8 +11,10 @@ class LocationHelper {
     }
 
     permission = await Geolocator.checkPermission();
+    
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
+
       if (permission == LocationPermission.denied) {
         throw 'Location permission denied';
       }

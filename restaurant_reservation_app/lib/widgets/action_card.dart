@@ -5,7 +5,7 @@ class ActionCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback onTap;
-  final Color color; 
+  final Color color;
 
   const ActionCard({
     super.key,
@@ -21,18 +21,14 @@ class ActionCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: color, 
+          color: color,
           borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.all(12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 36,
-              color: Colors.white, 
-            ),
+            Icon(icon, size: 36, color: Colors.white),
             const SizedBox(height: 8),
             Text(
               title,
@@ -40,7 +36,7 @@ class ActionCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, 
+                color: Colors.white,
               ),
             ),
           ],
